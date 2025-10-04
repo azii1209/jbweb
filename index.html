@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azii Store - Akun Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Hubungkan ke CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Banner Slider -->
+  <div class="slider">
+    <div class="slides" id="slides">
+      <img src="images/banner1.jpg" alt="Banner 1" />
+      <img src="images/banner2.jpg" alt="Banner 2" />
+      <img src="images/banner3.jpg" alt="Banner 3" />
+      <!-- Duplicate first slide for smooth loop -->
+      <img src="images/banner1.jpg" alt="Banner 1 duplicate" />
+    </div>
+  </div>
+
+  <section class="profile">
+    <img src="images/profile.jpg" alt="Foto profil" />
+    <h1>@AziiStore</h1>
+    <p>Menjual akun game, APK premium, dan layanan hosting. Produk terpercaya, harga terjangkau, proses cepat & aman.
+</p>
+  </section>
+
+  <section class="btns">
+    <a class="btn whatsapp" href="https://wa.me/6283184096035" target="_blank">Kontak WhatsApp (Azii Store)</a>
+    <a class="btn group" href="https://chat.whatsapp.com/Ll4i3sBGaWq7yk2DVm2r5H?mode=ems_copy_t" target="_blank">Grup WhatsApp (Azii Store)</a>
+    <a class="btn channel" href="https://whatsapp.com/channel/0029Vb2X2c70bIdiwE1xcy08" target="_blank">Saluran WhatsApp (Azii Store)</a>
+  </section>
+
+  <h2 id="stok-title">Stok Akun Terbaru</h2>
+  <section class="stock">
+    <div class="item" id="stok-item">
+      <img src="images/stok1.jpg" alt="MLBB Mythic" />
+      <div class="meta"><span>MLBB • Mythic</span><span class="price">Rp 850.000</span></div>
+    </div>
+  </section>
+
+  <footer id="footer">© <span id="year"></span> Azii Store</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Infinite smooth slider
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+    let index = 0;
+
+    setInterval(()=>{
+      index++;
+      slides.style.transition = 'transform 0.8s ease';
+      slides.style.transform = `translateX(-${index*100}%)`;
+
+      if(index === totalSlides-1){
+        setTimeout(()=>{
+          slides.style.transition = 'none';
+          slides.style.transform = 'translateX(0)';
+          index = 0;
+        }, 900);
+      }
+    },4000);
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    },{threshold:0.2});
+
+    document.querySelectorAll('.btn, h2, .item, footer').forEach(el=>{
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
